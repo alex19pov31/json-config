@@ -6,15 +6,15 @@ import (
 )
 
 // NewConfig - init config
-func NewConfig(fileName string) *jsonConfig {
-	return &jsonConfig{fileName: fileName}
+func NewConfig(fileName string) *JSONConfig {
+	return &JSONConfig{fileName: fileName}
 }
 
-type jsonConfig struct {
+type JSONConfig struct {
 	fileName string
 }
 
-func (jc *jsonConfig) Save(data interface{}) error {
+func (jc *JSONConfig) Save(data interface{}) error {
 	configFile, err := os.Create(jc.fileName)
 	defer configFile.Close()
 	if err != nil {
@@ -26,7 +26,7 @@ func (jc *jsonConfig) Save(data interface{}) error {
 	return encoder.Encode(data)
 }
 
-func (jc *jsonConfig) Load(data interface{}) error {
+func (jc *JSONConfig) Load(data interface{}) error {
 	f, err := os.Open(jc.fileName)
 	defer f.Close()
 
